@@ -9,7 +9,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/user-community")
@@ -55,5 +58,23 @@ public class UserCommunityController {
     @DeleteMapping("/{id}")
     public R<Boolean> delete(@ApiParam("社区ID") @PathVariable Integer id) {
         return R.ok(userCommunityService.removeById(id));
+    }
+
+    @ApiOperation("上传社区logo")
+    @PostMapping("/{id}/logo")
+    public R<Boolean> uploadLogo(
+            @ApiParam("社区ID") @PathVariable Integer id,
+            @ApiParam("logo图片文件") @RequestParam("file") MultipartFile file) throws IOException {
+        UserCommunity community = new UserCommunity();
+        community.setId(id);
+        community.setCommunityLogo(file.getBytes());
+        return R.ok(userCommunityService.updateById(community));
+    }
+
+    @ApiOperation("获取社区logo")
+    @GetMapping(value = "/{id}/logo", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getLogo(@ApiParam("社区ID") @PathVariable Integer id) {
+        UserCommunity community = userCommunityService.getById(id);
+        return community != null ? community.getCommunityLogo() : null;
     }
 }

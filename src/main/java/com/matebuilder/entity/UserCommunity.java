@@ -28,6 +28,9 @@ public class UserCommunity extends BaseEntity {
     @ApiModelProperty(value = "社区描述")
     private String communityDescription;
     
+    @ApiModelProperty(value = "社区logo图片数据")
+    private byte[] communityLogo;
+    
     @ApiModelProperty(value = "社区标签")
     private Integer communityLabelId;
     

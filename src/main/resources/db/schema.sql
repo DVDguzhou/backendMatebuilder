@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `tb_user_community` (
     `user_id` int NOT NULL COMMENT '用户ID（创建者）',
     `community_name` varchar(255) NOT NULL COMMENT '社区名称',
     `community_description` text COMMENT '社区描述',
+    `community_logo` MEDIUMBLOB COMMENT '社区logo图片数据',
     `community_label_id` int DEFAULT NULL COMMENT '社区标签',
     `expire_time` timestamp NULL DEFAULT NULL COMMENT '到期时间',
     `create_by` int DEFAULT NULL COMMENT '创建人',
