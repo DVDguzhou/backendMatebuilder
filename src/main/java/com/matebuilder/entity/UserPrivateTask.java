@@ -41,15 +41,15 @@ public class UserPrivateTask extends BaseEntity {
     @ApiModelProperty(value = "任务优先级")
     private Integer priority;
     
-    @ApiModelProperty(value = "计划开始时间")
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime startTime;
+    @ApiModelProperty(value = "计划开始时间", example = "13:30:00")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
+    private String startTime;
     
-    @ApiModelProperty(value = "计划结束时间")
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime endTime;
+    @ApiModelProperty(value = "计划结束时间", example = "14:30:00")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
+    private String endTime;
     
     @ApiModelProperty(value = "实际完成时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
     private LocalDateTime completionTime;
 }
