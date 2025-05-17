@@ -44,8 +44,9 @@ public class UserCommunityController {
 
     @ApiOperation("创建社区")
     @PostMapping
-    public R<Boolean> save(@ApiParam("社区信息") @RequestBody UserCommunity userCommunity) {
-        return R.ok(userCommunityService.save(userCommunity));
+    public R<Integer> save(@ApiParam("社区信息") @RequestBody UserCommunity userCommunity) {
+        userCommunityService.save(userCommunity);
+        return R.ok(userCommunity.getId());
     }
 
     @ApiOperation("更新社区")
