@@ -28,9 +28,9 @@ public class UserController {
     }
 
     @ApiOperation("获取用户详情")
-    @GetMapping("/{id}")
-    public R<User> getById(@ApiParam("用户ID") @PathVariable Integer id) {
-        return R.ok(userService.getById(id));
+    @GetMapping("/address/{walletAddress}")
+    public R<User> getByWalletAddress(@ApiParam("钱包地址") @PathVariable String walletAddress) {
+        return R.ok(userService.getByWalletAddress(walletAddress));
     }
 
     @ApiOperation("创建用户")

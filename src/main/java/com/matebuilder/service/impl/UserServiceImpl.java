@@ -7,4 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implements IUserService {
+
+    @Override
+    public User getByWalletAddress(String walletAddress) {
+        return lambdaQuery().eq(User::getWalletAddress, walletAddress).one();
+    }
 }
