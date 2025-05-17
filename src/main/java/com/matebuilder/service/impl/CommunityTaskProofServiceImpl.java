@@ -24,7 +24,7 @@ public class CommunityTaskProofServiceImpl extends ServiceImpl<CommunityTaskProo
                                             String taskDescription, MultipartFile proofFile) {
         try {
             // 上传文件到IPFS
-            String proofHash = ipfsUtil.uploadFile(proofFile.getInputStream());
+            String proofHash = ipfsUtil.uploadFile(proofFile);
             
             // 创建凭证记录
             CommunityTaskProof proof = new CommunityTaskProof();
@@ -40,7 +40,7 @@ public class CommunityTaskProofServiceImpl extends ServiceImpl<CommunityTaskProo
             save(proof);
             
             return proof;
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("上传凭证失败", e);
         }
     }

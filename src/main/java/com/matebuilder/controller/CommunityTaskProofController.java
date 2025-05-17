@@ -1,6 +1,6 @@
 package com.matebuilder.controller;
 
-import com.matebuilder.common.api.CommonResult;
+import com.matebuilder.common.api.R;
 import com.matebuilder.entity.CommunityTaskProof;
 import com.matebuilder.service.CommunityTaskProofService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +20,7 @@ public class CommunityTaskProofController {
 
     @Operation(summary = "上传任务凭证")
     @PostMapping("/upload")
-    public CommonResult<CommunityTaskProof> uploadTaskProof(
+    public R<CommunityTaskProof> uploadTaskProof(
             @RequestParam Integer communityId,
             @RequestParam Integer memberId,
             @RequestParam String taskTitle,
@@ -28,20 +28,20 @@ public class CommunityTaskProofController {
             @RequestParam MultipartFile proofFile) {
         CommunityTaskProof proof = communityTaskProofService.uploadTaskProof(
                 communityId, memberId, taskTitle, taskDescription, proofFile);
-        return CommonResult.success(proof);
+        return R.ok(proof);
     }
 
     @Operation(summary = "获取成员的任务凭证列表")
     @GetMapping("/member/{memberId}")
-    public CommonResult<List<CommunityTaskProof>> getMemberTaskProofs(@PathVariable Integer memberId) {
+    public R<List<CommunityTaskProof>> getMemberTaskProofs(@PathVariable Integer memberId) {
         List<CommunityTaskProof> proofs = communityTaskProofService.getMemberTaskProofs(memberId);
-        return CommonResult.success(proofs);
+        return R.ok(proofs);
     }
 
     @Operation(summary = "获取社区的任务凭证列表")
     @GetMapping("/community/{communityId}")
-    public CommonResult<List<CommunityTaskProof>> getCommunityTaskProofs(@PathVariable Integer communityId) {
+    public R<List<CommunityTaskProof>> getCommunityTaskProofs(@PathVariable Integer communityId) {
         List<CommunityTaskProof> proofs = communityTaskProofService.getCommunityTaskProofs(communityId);
-        return CommonResult.success(proofs);
+        return R.ok(proofs);
     }
 }
